@@ -32,7 +32,7 @@ public class Driver {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private DriverStatus status;
+    private DriverStatus status = DriverStatus.OFFLINE;
 
     @Column(name = "password_hash", nullable = false)
     private String passwordHash;
