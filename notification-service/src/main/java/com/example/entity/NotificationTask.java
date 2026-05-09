@@ -34,7 +34,7 @@ public class NotificationTask {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private NotificationTaskStatus status;
+    private NotificationTaskStatus status = NotificationTaskStatus.PENDING;
 
     @Column(name = "attempts", nullable = false)
     private Integer attempts;
