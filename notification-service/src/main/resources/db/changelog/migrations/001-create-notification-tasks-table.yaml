@@ -4,35 +4,45 @@ databaseChangeLog:
       author: akuskodanil
       changes:
         - createTable:
-            tableName: passengers
+            tableName: notification_tasks
             columns:
               - column:
                   name: id
                   type: BIGINT
                   autoIncrement: true
                   constraints:
+                    nullable: false
                     primaryKey: true
-                    nullable: false
+                    primaryKeyName: notification_tasks_pkey
               - column:
-                  name: name
-                  type: VARCHAR(255)
+                  name: trip_id
+                  type: BIGINT
                   constraints:
                     nullable: false
               - column:
-                  name: email
-                  type: VARCHAR(255)
+                  name: recipient_type
+                  type: VARCHAR(50)
                   constraints:
                     nullable: false
-                    unique: true
               - column:
-                  name: phone
-                  type: VARCHAR(30)
+                  name: recipient_id
+                  type: BIGINT
                   constraints:
                     nullable: false
-                    unique: true
               - column:
-                  name: password_hash
-                  type: VARCHAR(255)
+                  name: message
+                  type: TEXT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: VARCHAR(50)
+                  defaultValue: PENDING
+                  constraints:
+                    nullable: false
+              - column:
+                  name: attempts
+                  type: INT
                   constraints:
                     nullable: false
               - column:
@@ -41,3 +51,9 @@ databaseChangeLog:
                   defaultValueComputed: CURRENT_TIMESTAMP
                   constraints:
                     nullable: false
+        - createIndex:
+            indexName: idx_notification_task_status
+            tableName: notification_tasks
+            columns:
+              - column:
+                  name: status
