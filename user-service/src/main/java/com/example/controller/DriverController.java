@@ -25,7 +25,7 @@ public class DriverController {
     }
 
     @GetMapping("/{id}")
-    public DriverResponse getDriverById(Long id) {
+    public DriverResponse getDriverById(@PathVariable Long id) {
         Driver foundedDriver = driverService.getDriverById(id);
         return driverMapper.toResponse(foundedDriver);
     }
