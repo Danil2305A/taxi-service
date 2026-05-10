@@ -62,6 +62,7 @@ public class TripService {
 
         Trip trip = tripMapper.toEntity(requestBody);
         trip.setDriverId(driver.id());
+        trip.setPrice(requestBody.distance() * requestBody.tariff());
         tripRepository.save(trip);
 
         notificationServiceClient.sendNotificationTask(
