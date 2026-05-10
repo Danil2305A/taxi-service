@@ -22,8 +22,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -147,8 +147,8 @@ public class TripService {
             localDate = LocalDate.parse(date);
         }
 
-        Instant start = localDate.atStartOfDay(ZoneOffset.UTC).toInstant();
-        Instant end = localDate.plusDays(1).atStartOfDay(ZoneOffset.UTC).toInstant();
+        LocalDateTime start = localDate.atStartOfDay();
+        LocalDateTime end = localDate.plusDays(1).atStartOfDay();
 
         List<Object[]> statisticResult = tripRepository.getTripCountAndAveragePriceBetween(start, end);
         if (statisticResult.isEmpty()) {

@@ -17,6 +17,8 @@ repositories {
 }
 
 dependencies {
+    implementation("io.github.cdimascio:dotenv-java:3.2.0")
+
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     testCompileOnly("org.projectlombok:lombok")
