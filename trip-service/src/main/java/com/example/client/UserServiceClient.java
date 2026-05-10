@@ -1,13 +1,14 @@
 package com.example.client;
 
-import com.example.dto.request.UpdateDriverStatusRequest;
 import com.example.dto.response.DriverResponse;
 import com.example.dto.response.PassengerResponse;
+import com.example.enums.DriverStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Map;
 import java.util.Optional;
 
 @Component
@@ -35,9 +36,10 @@ public class UserServiceClient {
                 null, DriverResponse.class);
     }
 
-    public void updateDriverStatusById(Long id, UpdateDriverStatusRequest request) {
+    public void updateDriverStatusById(Long id, DriverStatus status) {
+        Map<String, String> requestBody = Map.of("status", status.name());
         restTemplate.patchForObject(
                 userServiceUrl + "/api/drivers/{id}/status",
-                request, Void.class, id);
+                requestBody, Void.class, id);
     }
 }
