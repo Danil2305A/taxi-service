@@ -37,7 +37,7 @@ public class NotificationTask {
     private NotificationTaskStatus status = NotificationTaskStatus.PENDING;
 
     @Column(name = "attempts", nullable = false)
-    private Integer attempts;
+    private Integer attempts = 0;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)

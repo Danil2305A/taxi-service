@@ -1,8 +1,6 @@
 package com.example.dto;
 
 import com.example.enums.RecipientType;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -17,10 +15,5 @@ public record CreateNotificationTaskRequest(
         Long recipientId,
 
         @NotBlank(message = "message is required")
-        String message,
-
-        @NotNull(message = "attempts is required")
-        @Min(2)
-        @Max(10)
-        Integer attempts) {
+        String message) {
 }

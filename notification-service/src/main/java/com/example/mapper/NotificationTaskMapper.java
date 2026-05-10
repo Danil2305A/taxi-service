@@ -10,6 +10,7 @@ import org.mapstruct.Mapping;
 public interface NotificationTaskMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "status", ignore = true)
+    @Mapping(target = "attempts", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     NotificationTask toEntity(CreateNotificationTaskRequest requestBody);
 

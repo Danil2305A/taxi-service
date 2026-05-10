@@ -43,6 +43,7 @@ databaseChangeLog:
               - column:
                   name: attempts
                   type: INT
+                  defaultValue: 0
                   constraints:
                     nullable: false
               - column:
