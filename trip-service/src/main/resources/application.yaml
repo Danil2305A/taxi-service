@@ -1,3 +1,35 @@
 spring:
+  config:
+    import: optional:file:.env[.properties]
+
   application:
     name: trip-service
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${TRIP_DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    enabled: true
+
+server:
+  port: ${TRIP_SERVICE_PORT}
+
+user-service:
+  url: http://localhost:${USER_SERVICE_PORT}
+
+notification-service:
+  url: http://localhost:${NOTIFICATION_SERVICE_PORT}
+
+jwt:
+  access-token:
+    secret: ${JWT_SECRET}

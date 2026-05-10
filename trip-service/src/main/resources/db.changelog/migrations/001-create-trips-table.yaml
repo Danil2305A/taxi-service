@@ -1,0 +1,70 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: akuskodanil
+      changes:
+        - createTable:
+            tableName: trips
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_trips
+              - column:
+                  name: passenger_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: driver_id
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: status
+                  type: VARCHAR(32)
+                  defaultValue: "CREATED"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: origin
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: destination
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: INTEGER
+                  constraints:
+                    nullable: true
+              - column:
+                  name: rating
+                  type: INTEGER
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: true
+
+        - createIndex:
+            tableName: trips
+            indexName: idx_trip_status
+            columns:
+              - column:
+                  name: status
+            unique: false
