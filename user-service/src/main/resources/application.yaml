@@ -15,11 +15,7 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: none
-    show-sql: true
-    open-in-view: false
-    properties:
-      hibernate:
-        format_sql: true
+    show-sql: false
 
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.yaml
@@ -27,7 +23,7 @@ spring:
 
 server:
   port: ${USER_SERVICE_PORT}
-  
+
 jwt:
   access-token:
     secret: ${JWT_SECRET}
