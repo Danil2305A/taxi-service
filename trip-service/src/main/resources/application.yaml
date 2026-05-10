@@ -1,7 +1,4 @@
 spring:
-  config:
-    import: optional:file:.env[.properties]
-
   application:
     name: trip-service
 
@@ -25,10 +22,10 @@ server:
   port: ${TRIP_SERVICE_PORT}
 
 user-service:
-  url: http://localhost:${USER_SERVICE_PORT}
+  url: ${USER_SERVICE_URL}
 
 notification-service:
-  url: http://localhost:${NOTIFICATION_SERVICE_PORT}
+  url: ${NOTIFICATION_SERVICE_URL}
 
 jwt:
   access-token:
