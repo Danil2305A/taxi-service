@@ -28,6 +28,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webmvc")
     testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
 
+    implementation("org.apache.httpcomponents.client5:httpclient5:5.3.1")
+
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.2")
 
     implementation("org.springframework.boot:spring-boot-starter-security")
