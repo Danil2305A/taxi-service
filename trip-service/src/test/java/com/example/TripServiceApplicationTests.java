@@ -71,7 +71,7 @@ class TripServiceApplicationTests {
         JSONObject json = new JSONObject(response.body());
         passengerId = json.getLong("id");
 
-        System.out.println("\nПассажир зарегистрирован:");
+        System.out.println("Пассажир зарегистрирован:");
         System.out.println(json.toString(2));
     }
 
