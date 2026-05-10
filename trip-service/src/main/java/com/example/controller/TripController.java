@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.dto.request.CreateTripRequest;
 import com.example.dto.request.RateTripRequest;
 import com.example.dto.request.UpdateTripStatusRequest;
+import com.example.dto.response.StatisticResponse;
 import com.example.dto.response.TripResponse;
 import com.example.service.TripService;
 import jakarta.validation.Valid;
@@ -42,5 +43,10 @@ public class TripController {
     public TripResponse rateTripById(@PathVariable Long id,
                                      @Valid @RequestBody RateTripRequest requestBody) {
         return tripService.rateTrip(id, requestBody.rating());
+    }
+
+    @GetMapping("/statistic")
+    public StatisticResponse getStatistic(@RequestParam(required = false) String date) {
+        return tripService.getStatisticForDate(date);
     }
 }

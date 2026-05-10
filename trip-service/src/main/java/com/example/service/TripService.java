@@ -6,6 +6,7 @@ import com.example.dto.request.CreateNotificationTaskRequest;
 import com.example.dto.request.CreateTripRequest;
 import com.example.dto.request.UpdateTripStatusRequest;
 import com.example.dto.response.DriverResponse;
+import com.example.dto.response.StatisticResponse;
 import com.example.dto.response.TripResponse;
 import com.example.entity.Trip;
 import com.example.enums.DriverStatus;
@@ -21,6 +22,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -133,5 +137,28 @@ public class TripService {
         );
 
         return tripMapper.toResponse(updatedTrip);
+    }
+
+    public StatisticResponse getStatisticForDate(String date) {
+        LocalDate localDate;
+        if (date == null || date.isBlank()) {
+            localDate = LocalDate.now(ZoneOffset.UTC);
+        } else {
+            localDate = LocalDate.parse(date);
+        }
+
+        Instant start = localDate.atStartOfDay(ZoneOffset.UTC).toInstant();
+        Instant end = localDate.plusDays(1).atStartOfDay(ZoneOffset.UTC).toInstant();
+
+        List<Object[]> statisticResult = tripRepository.getTripCountAndAveragePriceBetween(start, end);
+        if (statisticResult.isEmpty()) {
+            return new StatisticResponse(localDate.toString(), 0L, 0.0);
+        }
+
+        Object[] res = statisticResult.getFirst();
+        long tripCount = ((Number) res[0]).longValue();
+        double averagePrice = res[1] != null ? ((Number) res[1]).doubleValue() : 0.0;
+
+        return new StatisticResponse(localDate.toString(), tripCount, averagePrice);
     }
 }
