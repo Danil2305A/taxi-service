@@ -1,0 +1,25 @@
+package com.example.repository;
+
+import com.example.entity.Driver;
+import com.example.enums.DriverStatus;
+import jakarta.persistence.LockModeType;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import java.util.Optional;
+
+public interface DriverRepository extends JpaRepository<Driver, Long> {
+    boolean existsByEmail(String email);
+
+    boolean existsByPhone(String phone);
+
+    boolean existsByLicenseNumber(String licenseNumber);
+
+    Optional<Driver> findByEmail(String email);
+
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    @Query("SELECT d FROM Driver d WHERE d.status = :status ORDER BY d.id ASC FETCH FIRST 1 ROWS ONLY")
+    Optional<Driver> findFirstFreeDriverForUpdate(@Param("status") DriverStatus status);
+}

@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: notification-service
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${NOTIFICATION_DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    enabled: true
+
+server:
+  port: ${NOTIFICATION_SERVICE_PORT}
+
+jwt:
+  access-token:
+    secret: ${JWT_SECRET}
